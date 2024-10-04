@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:todoet_flutter/screens/task_screen.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:provider/provider.dart';
-
+import "package:provider/provider.dart";
 
 import 'models/task_data.dart';
 void main() async {

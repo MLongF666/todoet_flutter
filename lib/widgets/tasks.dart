@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:todoet_flutter/models/task_dao.dart';
 import 'package:todoet_flutter/models/task_data.dart';
 
 
@@ -27,17 +28,20 @@ class TaskTitle extends StatelessWidget {
   }
 }
 class TaskList extends StatelessWidget {
+  final List<TaskDao> list;
+  TaskList({required this.list});
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskData>(
       builder: (context,taskData,child){
         return ListView.builder(itemBuilder: (context,index) {
-          final task= taskData.tasks[index];
+          final task= list[index];
           return TaskTitle(
-              isChecked:task.isDone ,
+              isChecked:task.isDone==0 ? false : true ,
               taskTitle: task.name,
               checkboxCallback: (checkBoxState){
-                  taskData.updateTask(task);
+                print(checkBoxState);
+                taskData.updateTask(task);
               }
           );
         },itemCount: taskData.taskCount);

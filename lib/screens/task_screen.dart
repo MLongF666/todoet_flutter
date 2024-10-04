@@ -2,13 +2,19 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:todoet_flutter/models/task_data.dart';
+import '../databse/DBUtil.dart';
+import '../models/task_dao.dart';
 import '../widgets/tasks.dart';
 import 'add_task_screen.dart';
 
 
+
 class TaskScreen extends StatelessWidget {
+  List<TaskDao> tasks=[];
   @override
   Widget build(BuildContext context) {
+    DatabaseUtil db=DatabaseUtil();
+    db.getTasks().then((value) => tasks=value);
     return Scaffold(
       backgroundColor: Colors.lightBlueAccent,
       floatingActionButton: FloatingActionButton(
@@ -58,7 +64,7 @@ class TaskScreen extends StatelessWidget {
                     topLeft: Radius.circular(20.0),
                     topRight: Radius.circular(20.0)),
               ),
-              child: TaskList(),
+              child: TaskList( list: tasks,),
             ),
           )
         ],
